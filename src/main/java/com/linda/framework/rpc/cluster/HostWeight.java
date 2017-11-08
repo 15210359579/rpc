@@ -11,8 +11,8 @@ public class HostWeight {
 
     private int weight;
 
-    public String getKey(){
-        return host+":"+port;
+    public String getKey() {
+        return host + ":" + port;
     }
 
     public String getHost() {
@@ -39,7 +39,7 @@ public class HostWeight {
         this.weight = weight;
     }
 
-    public void setKey(String key){
+    public void setKey(String key) {
         //do nothing
     }
 }

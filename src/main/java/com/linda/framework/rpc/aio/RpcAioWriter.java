@@ -4,24 +4,22 @@ import com.linda.framework.rpc.net.AbstractRpcConnector;
 import com.linda.framework.rpc.net.AbstractRpcWriter;
 
 /**
- * 
  * @author lindezhi
- *
  */
-public class RpcAioWriter extends AbstractRpcWriter{
-	
-	public RpcAioWriter(){
-		super();
-	}
+public class RpcAioWriter extends AbstractRpcWriter {
 
-	/**
-	 * 使用channel执行发送
-	 */
-	@Override
-	public boolean doSend(AbstractRpcConnector connector) {
-		RpcAioConnector aioConnector = (RpcAioConnector)connector;
-		aioConnector.exeSend();
-		return true;
-	}
+    public RpcAioWriter() {
+        super();
+    }
+
+    /**
+     * 使用channel执行发送
+     */
+    @Override
+    public boolean doSend(AbstractRpcConnector connector) {
+        AbstractRpcAioConnector aioConnector = (AbstractRpcAioConnector) connector;
+        aioConnector.exeSend();
+        return true;
+    }
 
 }

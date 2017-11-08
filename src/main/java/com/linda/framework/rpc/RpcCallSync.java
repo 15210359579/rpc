@@ -7,76 +7,77 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * rpc请求线程同步bean
+ *
  * @author lindezhi
  * 2016年3月9日 上午11:25:59
  */
-public class RpcCallSync implements Future{
-	
-	private int index;
-	
-	/**
-	 * 请求发送包
-	 */
-	private RpcObject request;
-	
-	/**
-	 * 请求返回数据包
-	 */
-	private RpcObject response;
+public class RpcCallSync implements Future {
 
-	public RpcCallSync(int index,RpcObject request){
-		this.index = index;
-		this.request = request;
-	}
-	
-	public RpcObject getRequest() {
-		return request;
-	}
+    private int index;
 
-	public void setRequest(RpcObject request) {
-		this.request = request;
-	}
+    /**
+     * 请求发送包
+     */
+    private RpcObject request;
 
-	public RpcObject getResponse() {
-		return response;
-	}
+    /**
+     * 请求返回数据包
+     */
+    private RpcObject response;
 
-	public void setResponse(RpcObject response) {
-		this.response = response;
-	}
+    public RpcCallSync(int index, RpcObject request) {
+        this.index = index;
+        this.request = request;
+    }
 
-	public int getIndex() {
-		return index;
-	}
+    public RpcObject getRequest() {
+        return request;
+    }
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    public void setRequest(RpcObject request) {
+        this.request = request;
+    }
 
-	@Override
-	public boolean cancel(boolean mayInterruptIfRunning) {
-		return false;
-	}
+    public RpcObject getResponse() {
+        return response;
+    }
 
-	@Override
-	public boolean isCancelled() {
-		return false;
-	}
+    public void setResponse(RpcObject response) {
+        this.response = response;
+    }
 
-	@Override
-	public boolean isDone() {
-		return response!=null;
-	}
+    public int getIndex() {
+        return index;
+    }
 
-	@Override
-	public Object get() throws InterruptedException, ExecutionException {
-		return response;
-	}
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
-	@Override
-	public Object get(long timeout, TimeUnit unit) throws InterruptedException,
-			ExecutionException, TimeoutException {
-		return null;
-	}
-	
+    @Override
+    public boolean cancel(boolean mayInterruptIfRunning) {
+        return false;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return false;
+    }
+
+    @Override
+    public boolean isDone() {
+        return response != null;
+    }
+
+    @Override
+    public Object get() throws InterruptedException, ExecutionException {
+        return response;
+    }
+
+    @Override
+    public Object get(long timeout, TimeUnit unit) throws InterruptedException,
+            ExecutionException, TimeoutException {
+        return null;
+    }
+
 }

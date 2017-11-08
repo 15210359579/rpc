@@ -1,11 +1,5 @@
 package com.linda.framework.rpc.client;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.linda.framework.rpc.RemoteCall;
 import com.linda.framework.rpc.RemoteExecutor;
 import com.linda.framework.rpc.RpcContext;
@@ -13,102 +7,108 @@ import com.linda.framework.rpc.Service;
 import com.linda.framework.rpc.utils.RpcUtils;
 import com.linda.framework.rpc.utils.XAliasUtils;
 
-public class SimpleClientRemoteProxy implements InvocationHandler,Service{
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-	private RemoteExecutor remoteExecutor;
-	
-	private ConcurrentHashMap<Class,String> versionCache = new ConcurrentHashMap<Class,String>();
+public class SimpleClientRemoteProxy implements InvocationHandler, Service {
 
-	private ConcurrentHashMap<Class,String> groupCache = new ConcurrentHashMap<Class,String>();
+    private RemoteExecutor remoteExecutor;
 
-	/**
-	 * 应用
-	 */
-	private String application;
-	
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args)
-			throws Throwable {
-		Class<?> service = method.getDeclaringClass();
-		
-		String name = method.getName();
-		RemoteCall call = new RemoteCall(service.getName(),name);
-		call.setArgs(args);
-		String version = versionCache.get(service);
-		if(version!=null){
-			call.setVersion(version);
-		}else{
-			call.setVersion(RpcUtils.DEFAULT_VERSION);
-		}
+    private ConcurrentHashMap<Class, String> versionCache = new ConcurrentHashMap<Class, String>();
 
-		String group = groupCache.get(service);
-		if(group==null){
-			group = RpcUtils.DEFAULT_GROUP;
-		}
-		call.setGroup(group);
-		
-		//加入上下文附件传送支持
-		Map<String, Object> attachment = RpcContext.getContext().getAttachment();
-		call.setAttachment(attachment);
+    private ConcurrentHashMap<Class, String> groupCache = new ConcurrentHashMap<Class, String>();
 
-		//客户点应用加入附件中
-		call.getAttachment().put("Application",application);
+    /**
+     * 应用
+     */
+    private String application;
 
-		if(method.getReturnType()==void.class){
-			remoteExecutor.oneway(call);
-			return null;
-		}
-		return remoteExecutor.invoke(call);
-	}
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
+        Class<?> service = method.getDeclaringClass();
 
-	public RemoteExecutor getRemoteExecutor() {
-		return remoteExecutor;
-	}
+        String     name = method.getName();
+        RemoteCall call = new RemoteCall(service.getName(), name);
+        call.setArgs(args);
+        String version = versionCache.get(service);
+        if (version != null) {
+            call.setVersion(version);
+        } else {
+            call.setVersion(RpcUtils.DEFAULT_VERSION);
+        }
 
-	public void setRemoteExecutor(RemoteExecutor remoteExecutor) {
-		this.remoteExecutor = remoteExecutor;
-	}
-	
-	public <Iface> Iface registerRemote(Class<Iface> remote){
-		return this.registerRemote(remote, RpcUtils.DEFAULT_VERSION);
-	}
-	
-	public <Iface> Iface registerRemote(Class<Iface> remote,String version){
-		return this.registerRemote(remote, version,RpcUtils.DEFAULT_GROUP);
-	}
+        String group = groupCache.get(service);
+        if (group == null) {
+            group = RpcUtils.DEFAULT_GROUP;
+        }
+        call.setGroup(group);
 
-	public <Iface> Iface registerRemote(Class<Iface> remote,String version,String group){
-		Iface result = (Iface)Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{remote}, this);
-		if(version==null){
-			version = RpcUtils.DEFAULT_VERSION;
-		}
-		versionCache.put(remote, version);
+        //加入上下文附件传送支持
+        Map<String, Object> attachment = RpcContext.getContext().getAttachment();
+        call.setAttachment(attachment);
 
-		if(group==null){
-			group = RpcUtils.DEFAULT_GROUP;
-		}
+        //客户点应用加入附件中
+        call.getAttachment().put("Application", application);
 
-		XAliasUtils.addServiceRefType(remote);
+        if (method.getReturnType() == void.class) {
+            remoteExecutor.oneway(call);
+            return null;
+        }
+        return remoteExecutor.invoke(call);
+    }
 
-		groupCache.put(remote,group);
-		return result;
-	}
+    public RemoteExecutor getRemoteExecutor() {
+        return remoteExecutor;
+    }
 
-	@Override
-	public void startService() {
-		remoteExecutor.startService();
-	}
+    public void setRemoteExecutor(RemoteExecutor remoteExecutor) {
+        this.remoteExecutor = remoteExecutor;
+    }
 
-	@Override
-	public void stopService() {
-		remoteExecutor.stopService();
-	}
+    public <Iface> Iface registerRemote(Class<Iface> remote) {
+        return this.registerRemote(remote, RpcUtils.DEFAULT_VERSION);
+    }
 
-	public String getApplication() {
-		return application;
-	}
+    public <Iface> Iface registerRemote(Class<Iface> remote, String version) {
+        return this.registerRemote(remote, version, RpcUtils.DEFAULT_GROUP);
+    }
 
-	public void setApplication(String application) {
-		this.application = application;
-	}
+    public <Iface> Iface registerRemote(Class<Iface> remote, String version, String group) {
+        Iface result = (Iface) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{remote}, this);
+        if (version == null) {
+            version = RpcUtils.DEFAULT_VERSION;
+        }
+        versionCache.put(remote, version);
+
+        if (group == null) {
+            group = RpcUtils.DEFAULT_GROUP;
+        }
+
+        XAliasUtils.addServiceRefType(remote);
+
+        groupCache.put(remote, group);
+        return result;
+    }
+
+    @Override
+    public void startService() {
+        remoteExecutor.startService();
+    }
+
+    @Override
+    public void stopService() {
+        remoteExecutor.stopService();
+    }
+
+    public String getApplication() {
+        return application;
+    }
+
+    public void setApplication(String application) {
+        this.application = application;
+    }
 }

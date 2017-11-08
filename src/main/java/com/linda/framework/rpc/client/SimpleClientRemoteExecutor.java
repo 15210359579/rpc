@@ -5,38 +5,38 @@ import com.linda.framework.rpc.RemoteExecutor;
 import com.linda.framework.rpc.Service;
 import com.linda.framework.rpc.net.AbstractRpcConnector;
 import com.linda.framework.rpc.net.RpcCallListener;
-import com.linda.framework.rpc.oio.RpcOioConnector;
+import com.linda.framework.rpc.oio.AbstractRpcOioConnector;
 
-public class SimpleClientRemoteExecutor extends AbstractClientRemoteExecutor implements RemoteExecutor,RpcCallListener,Service{
-	
-	private AbstractRpcConnector connector;
-	
-	public SimpleClientRemoteExecutor(AbstractRpcConnector connector){
-		super();
-		connector.addRpcCallListener(this);
-		this.connector = connector;
-	}
+public class SimpleClientRemoteExecutor extends AbstractClientRemoteExecutor implements RemoteExecutor, RpcCallListener, Service {
 
-	public AbstractRpcConnector getConnector() {
-		return connector;
-	}
+    private AbstractRpcConnector connector;
 
-	public void setConnector(RpcOioConnector connector) {
-		this.connector = connector;
-	}
+    public SimpleClientRemoteExecutor(AbstractRpcConnector connector) {
+        super();
+        connector.addRpcCallListener(this);
+        this.connector = connector;
+    }
 
-	@Override
-	public void startService() {
-		connector.startService();
-	}
+    public AbstractRpcConnector getConnector() {
+        return connector;
+    }
 
-	@Override
-	public void stopService() {
-		connector.stopService();
-	}
+    public void setConnector(AbstractRpcOioConnector connector) {
+        this.connector = connector;
+    }
 
-	@Override
-	public AbstractRpcConnector getRpcConnector(RemoteCall call) {
-		return connector;
-	}
+    @Override
+    public void startService() {
+        connector.startService();
+    }
+
+    @Override
+    public void stopService() {
+        connector.stopService();
+    }
+
+    @Override
+    public AbstractRpcConnector getRpcConnector(RemoteCall call) {
+        return connector;
+    }
 }
