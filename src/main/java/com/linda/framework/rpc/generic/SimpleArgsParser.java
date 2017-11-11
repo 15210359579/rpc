@@ -100,7 +100,7 @@ public class SimpleArgsParser implements ArgsParser {
             return (Character) obj;
         } else if ("int".equals(type)) {
             return (int) (Integer) obj;
-        } else if ("long".equals(type)) {
+        } else if (type.equals("long")) {
             return (long) (Long) obj;
         } else if ("short".equals(type)) {
             return (short) (Short) obj;
