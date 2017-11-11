@@ -98,21 +98,21 @@ public class SimpleArgsParser implements ArgsParser {
             return (Byte) obj;
         } else if (type.startsWith("java.lang.Character")) {
             return (Character) obj;
-        } else if (type.equals("int")) {
+        } else if ("int".equals(type)) {
             return (int) (Integer) obj;
         } else if (type.equals("long")) {
             return (long) (Long) obj;
-        } else if (type.equals("short")) {
+        } else if ("short".equals(type)) {
             return (short) (Short) obj;
-        } else if (type.equals("boolean")) {
+        } else if ("boolean".equals(type)) {
             return (boolean) (Boolean) obj;
-        } else if (type.equals("float")) {
+        } else if ("float".equals(type)) {
             return (float) (Float) obj;
-        } else if (type.equals("double")) {
+        } else if ("double".equals(type)) {
             return (double) (Double) obj;
-        } else if (type.equals("byte")) {
+        } else if ("byte".equals(type)) {
             return (byte) (Byte) obj;
-        } else if (type.equals("char")) {
+        } else if ("char".equals(type)) {
             return (char) (Character) obj;
         }
         return this.parseObject(type, obj);
