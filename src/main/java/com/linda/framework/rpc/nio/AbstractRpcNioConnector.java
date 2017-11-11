@@ -1,5 +1,6 @@
 package com.linda.framework.rpc.nio;
 
+import com.google.common.base.Objects;
 import com.linda.framework.rpc.exception.RpcException;
 import com.linda.framework.rpc.net.AbstractRpcConnector;
 import com.linda.framework.rpc.net.RpcNetListener;
@@ -152,5 +153,27 @@ public class AbstractRpcNioConnector extends AbstractRpcConnector {
     public void handleConnectorException(Exception e) {
         logger.error("connector " + this.getHost() + ":" + this.getPort() + " io exception start to shutdown");
         this.stopService();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (!(o instanceof AbstractRpcNioConnector)) { return false; }
+        AbstractRpcNioConnector that = (AbstractRpcNioConnector) o;
+        return Objects.equal(getChannel(), that.getChannel()) &&
+               Objects.equal(selector, that.selector) &&
+               Objects.equal(logger, that.logger) &&
+               Objects.equal(getChannelWriteBuffer(), that.getChannelWriteBuffer()) &&
+               Objects.equal(getChannelReadBuffer(), that.getChannelReadBuffer()) &&
+               Objects.equal(getSelectionKey(), that.getSelectionKey()) &&
+               Objects.equal(getRpcNioReadBuffer(), that.getRpcNioReadBuffer()) &&
+               Objects.equal(getRpcNioWriteBuffer(), that.getRpcNioWriteBuffer()) &&
+               Objects.equal(getAcceptor(), that.getAcceptor());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getChannel(), selector, logger, getChannelWriteBuffer(), getChannelReadBuffer(),
+                                getSelectionKey(), getRpcNioReadBuffer(), getRpcNioWriteBuffer(), getAcceptor());
     }
 }

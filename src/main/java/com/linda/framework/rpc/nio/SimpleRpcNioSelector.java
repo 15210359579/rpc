@@ -1,5 +1,6 @@
 package com.linda.framework.rpc.nio;
 
+import com.google.common.base.Objects;
 import com.linda.framework.rpc.RpcObject;
 import com.linda.framework.rpc.exception.RpcException;
 import com.linda.framework.rpc.net.AbstractRpcConnector;
@@ -333,4 +334,27 @@ public class SimpleRpcNioSelector extends AbstractRpcNioSelector {
         logger.error("selector exception:" + e.getMessage());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (!(o instanceof SimpleRpcNioSelector)) { return false; }
+        if (!super.equals(o)) { return false; }
+        SimpleRpcNioSelector that = (SimpleRpcNioSelector) o;
+        return stop == that.stop &&
+               started == that.started &&
+               Objects.equal(selector, that.selector) &&
+               Objects.equal(connectorCache, that.connectorCache) &&
+               Objects.equal(connectors, that.connectors) &&
+               Objects.equal(acceptorCache, that.acceptorCache) &&
+               Objects.equal(acceptors, that.acceptors) &&
+               Objects.equal(selectTasks, that.selectTasks) &&
+               Objects.equal(delegageSelector, that.delegageSelector) &&
+               Objects.equal(logger, that.logger);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(super.hashCode(), selector, stop, started, connectorCache, connectors, acceptorCache,
+                                acceptors, selectTasks, delegageSelector, logger);
+    }
 }

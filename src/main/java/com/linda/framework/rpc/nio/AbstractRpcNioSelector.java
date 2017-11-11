@@ -1,5 +1,6 @@
 package com.linda.framework.rpc.nio;
 
+import com.google.common.base.Objects;
 import com.linda.framework.rpc.Service;
 import com.linda.framework.rpc.exception.RpcNetExceptionHandler;
 import com.linda.framework.rpc.net.AbstractRpcNet;
@@ -36,4 +37,16 @@ public abstract class AbstractRpcNioSelector implements Service, RpcOutputNofity
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (!(o instanceof AbstractRpcNioSelector)) { return false; }
+        AbstractRpcNioSelector that = (AbstractRpcNioSelector) o;
+        return Objects.equal(netListeners, that.netListeners);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(netListeners);
+    }
 }

@@ -30,10 +30,8 @@ public class XaliasUtils {
         addAlias("double", "double");
         addAlias("boolean", "boolean");
         addAlias("char", "char");
-
         addAlias("string", "java.lang.String");
         addAlias("String", "java.lang.String");
-
         addAlias("Integer", "java.lang.Integer");
         addAlias("Short", "java.lang.Short");
         addAlias("Long", "java.lang.Long");
@@ -42,11 +40,9 @@ public class XaliasUtils {
         addAlias("Double", "java.lang.Double");
         addAlias("Boolean", "java.lang.Boolean");
         addAlias("Character", "java.lang.Character");
-
         addAlias("List", "java.util.List");
         addAlias("Map", "java.util.Map");
         addAlias("Set", "java.util.Set");
-
     }
 
     public static boolean isInnerType(Class clazz) {

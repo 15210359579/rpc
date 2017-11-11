@@ -14,7 +14,7 @@ import java.util.UUID;
  * @author lindezhi
  * 及时通知管理服务器提供的rpc和状态
  */
-public abstract class RpcClusterServer extends SimpleRpcServer implements RpcNetListener, Service {
+public abstract class AbstractRpcClusterServer extends SimpleRpcServer implements RpcNetListener, Service {
 
     /**
      * 是否校验token
