@@ -26,7 +26,7 @@ public class SimpleRpcFilterChain implements RpcFilterChain {
             index = 0;
         }
         rpcFilterIndex.set(index + 1);
-        return index;
+        return index.intValue();
     }
 
     @Override

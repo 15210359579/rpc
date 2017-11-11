@@ -4,7 +4,6 @@ import com.linda.framework.rpc.RpcObject;
 
 public interface RpcSender {
     /**
-     *
      * @param rpc
      * @param timeout
      * @return

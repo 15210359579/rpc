@@ -5,7 +5,7 @@ import com.linda.framework.rpc.RemoteExecutor;
 import com.linda.framework.rpc.RpcContext;
 import com.linda.framework.rpc.Service;
 import com.linda.framework.rpc.utils.RpcUtils;
-import com.linda.framework.rpc.utils.XAliasUtils;
+import com.linda.framework.rpc.utils.XaliasUtils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -88,7 +88,7 @@ public class SimpleClientRemoteProxy implements InvocationHandler, Service {
             group = RpcUtils.DEFAULT_GROUP;
         }
 
-        XAliasUtils.addServiceRefType(remote);
+        XaliasUtils.addServiceRefType(remote);
 
         groupCache.put(remote, group);
         return result;

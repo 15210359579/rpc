@@ -19,7 +19,9 @@ public abstract class AbstractRpcConnector extends AbstractRpcNet implements Ser
 
     protected ConcurrentLinkedQueue<RpcObject> sendQueueCache = new ConcurrentLinkedQueue<RpcObject>();
 
-    //写线程
+    /**
+     * 写线程
+     */
     private AbstractRpcWriter rpcWriter;
 
     public AbstractRpcConnector(AbstractRpcWriter rpcWriter) {

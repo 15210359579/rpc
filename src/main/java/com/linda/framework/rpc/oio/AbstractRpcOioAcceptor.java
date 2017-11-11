@@ -2,7 +2,7 @@ package com.linda.framework.rpc.oio;
 
 import com.linda.framework.rpc.exception.RpcException;
 import com.linda.framework.rpc.net.AbstractRpcAcceptor;
-import com.linda.framework.rpc.utils.SSLUtils;
+import com.linda.framework.rpc.utils.SslUtils;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class AbstractRpcOioAcceptor extends AbstractRpcAcceptor {
     public void startService() {
         super.startService();
         try {
-            server = SSLUtils.getServerSocketInstance(sslContext, sslMode);
+            server = SslUtils.getServerSocketInstance(sslContext, sslMode);
             server.bind(new InetSocketAddress(this.getHost(), this.getPort()));
             this.startListeners();
             new AcceptThread().start();

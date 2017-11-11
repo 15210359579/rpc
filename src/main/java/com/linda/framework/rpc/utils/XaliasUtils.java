@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by lin on 2016/12/27.
  */
-public class XAliasUtils {
+public class XaliasUtils {
 
     public static ConcurrentHashMap<String, ConcurrentHashMap<String, String>> fieldAliasCache =
             new ConcurrentHashMap<String, ConcurrentHashMap<String, String>>();
@@ -133,12 +133,13 @@ public class XAliasUtils {
         }
 
         ConcurrentHashMap<String, String> fieldCache = fieldAliasCache.get(name);
+        Set<Field>                        classField = getClassField(clazz);
         if (fieldCache == null) {
-            fieldCache = new ConcurrentHashMap<String, String>();
+            fieldCache = new ConcurrentHashMap<String, String>(8);
             fieldAliasCache.put(name, fieldCache);
         }
 
-        Set<Field> classField = getClassField(clazz);
+
         for (Field field : classField) {
             String fname  = field.getName();
             XName  falias = (XName) field.getAnnotation(XName.class);

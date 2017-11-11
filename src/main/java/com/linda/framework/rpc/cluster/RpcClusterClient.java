@@ -104,12 +104,21 @@ public class RpcClusterClient extends AbstractRpcClient {
         getClusterClientExecutor().setConnectorClass(connectorClass);
     }
 
-    //生成代理方便管理
+    /**
+     * 生成代理方便管理
+     *
+     * @return
+     */
     public List<RpcHostAndPort> getHostAndPorts() {
         return getClusterClientExecutor().getHostAndPorts();
     }
 
-    //生成代理方便管理
+    /**
+     * 生成代理方便管理
+     *
+     * @param hostAndPort
+     * @return
+     */
     public List<RpcService> getServerService(RpcHostAndPort hostAndPort) {
         return getClusterClientExecutor().getServerService(hostAndPort);
     }

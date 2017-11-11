@@ -1,5 +1,6 @@
 package com.linda.framework.rpc.filter;
 
+import com.google.common.collect.Maps;
 import com.linda.framework.rpc.RemoteCall;
 import com.linda.framework.rpc.RpcObject;
 import com.linda.framework.rpc.Service;
@@ -115,8 +116,9 @@ public class RpcStatFilter implements RpcFilter, Service, StatMonitor {
 
     @Override
     public Map<Long, Long> getRpcStat() {
-        HashMap<Long, Long> result = new HashMap<Long, Long>();
         List<Long>          times  = this.getStatTime();
+        HashMap<Long, Long> result = Maps.newHashMapWithExpectedSize(times.size());
+
         for (Long time : times) {
             AtomicLong ato = staCache.get(time);
             if (ato != null) {

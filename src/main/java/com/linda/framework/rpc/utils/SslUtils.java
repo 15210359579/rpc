@@ -13,9 +13,9 @@ import java.net.Socket;
  * @author lindezhi
  * 2016年6月13日 下午4:29:59
  */
-public class SSLUtils {
+public class SslUtils {
 
-    private static Logger logger = Logger.getLogger(SSLUtils.class);
+    private static Logger logger = Logger.getLogger(SslUtils.class);
 
     public static Socket getSocketInstance(SSLContext sslContext, int sslmode) {
         Socket socket = null;
@@ -37,7 +37,8 @@ public class SSLUtils {
     public static void postSSLSocket(SSLSocket socket, int sslmode) {
         String[] pwdsuits = socket.getSupportedCipherSuites();
         socket.setEnabledCipherSuites(pwdsuits);
-        if (sslmode == 2) {//双向认证
+        //双向认证
+        if (sslmode == 2) {
             socket.setUseClientMode(false);
             socket.setNeedClientAuth(true);
         } else {

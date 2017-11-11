@@ -11,9 +11,13 @@ import java.util.concurrent.Executors;
 
 public abstract class AbstractRpcNet extends AbstractRpcNetworkBase implements RpcNetExceptionHandler {
 
-    //时间分配执行器
+    /**
+     * 时间分配执行器
+     */
     private ExecutorService executorService;
-    //sharable connector可以关闭，否则不能
+    /**
+     * sharable connector可以关闭，否则不能
+     */
     private boolean         executorSharable;
 
     protected List<RpcCallListener> callListeners;
@@ -21,7 +25,9 @@ public abstract class AbstractRpcNet extends AbstractRpcNetworkBase implements R
     protected List<RpcNetListener> netListeners;
 
     private static final int DEFAULT_EXECUTOR_THREAD_COUNT = 3;
-    //执行器数量
+    /**
+     * 执行器数量
+     */
     private              int executorThreadCount           = DEFAULT_EXECUTOR_THREAD_COUNT;
 
     public AbstractRpcNet() {

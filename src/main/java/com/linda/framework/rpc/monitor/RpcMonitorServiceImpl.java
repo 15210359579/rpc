@@ -1,5 +1,6 @@
 package com.linda.framework.rpc.monitor;
 
+import com.google.common.collect.Maps;
 import com.linda.framework.rpc.RpcService;
 import com.linda.framework.rpc.RpcServiceBean;
 import com.linda.framework.rpc.server.RpcServicesHolder;
@@ -57,6 +58,6 @@ public class RpcMonitorServiceImpl implements RpcMonitorService {
         if (statMonitor != null) {
             return statMonitor.getRpcStat();
         }
-        return new HashMap<Long, Long>();
+        return Maps.newHashMapWithExpectedSize(8);
     }
 }

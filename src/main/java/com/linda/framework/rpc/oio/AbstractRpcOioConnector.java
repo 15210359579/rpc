@@ -5,7 +5,7 @@ import com.linda.framework.rpc.exception.RpcException;
 import com.linda.framework.rpc.exception.RpcNetExceptionHandler;
 import com.linda.framework.rpc.net.AbstractRpcConnector;
 import com.linda.framework.rpc.utils.RpcUtils;
-import com.linda.framework.rpc.utils.SSLUtils;
+import com.linda.framework.rpc.utils.SslUtils;
 import org.apache.log4j.Logger;
 
 import java.io.DataInputStream;
@@ -46,7 +46,7 @@ public class AbstractRpcOioConnector extends AbstractRpcConnector implements Rpc
         super.startService();
         try {
             if (socket == null) {
-                socket = SSLUtils.getSocketInstance(sslContext, sslMode);
+                socket = SslUtils.getSocketInstance(sslContext, sslMode);
                 socket.connect(new InetSocketAddress(this.getHost(), this.getPort()));
             }
             InetSocketAddress remoteAddress = (InetSocketAddress) socket.getRemoteSocketAddress();

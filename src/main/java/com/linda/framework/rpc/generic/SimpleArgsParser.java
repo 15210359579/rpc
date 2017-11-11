@@ -1,5 +1,6 @@
 package com.linda.framework.rpc.generic;
 
+import com.google.common.collect.Maps;
 import com.linda.framework.rpc.exception.RpcException;
 import com.linda.framework.rpc.utils.RpcUtils;
 
@@ -167,9 +168,9 @@ public class SimpleArgsParser implements ArgsParser {
             } else if (arg instanceof Map) {
                 this.checkCollectionType(type, arg);
                 Map<Object, Object> list     = (Map<Object, Object>) arg;
-                Map<Object, Object> nargList = new HashMap<Object, Object>();
                 String[]            mapType  = this.getType(type);
                 Set<Object>         keys     = list.keySet();
+                Map<Object, Object> nargList = Maps.newHashMapWithExpectedSize(keys.size());
                 for (Object key : keys) {
                     Object k = this.parseArg(mapType[0], nargList);
                     Object a = list.get(key);
@@ -251,9 +252,9 @@ public class SimpleArgsParser implements ArgsParser {
     }
 
     private Map<String, Object> parseObjectToMap(Object obj) {
-        HashMap<String, Object> map    = new HashMap<String, Object>();
         Class<? extends Object> clazz  = obj.getClass();
         List<Field>             fields = RpcUtils.getFields(clazz);
+        HashMap<String, Object> map    = Maps.newHashMapWithExpectedSize(fields.size());
         for (Field f : fields) {
             f.setAccessible(true);
             int mod = f.getModifiers();
@@ -337,9 +338,9 @@ public class SimpleArgsParser implements ArgsParser {
             }
             return list;
         } else if (result instanceof Map) {
-            Map<Object, Object> map  = new HashMap<Object, Object>();
             Map<Object, Object> is   = (Map<Object, Object>) result;
             Set<Object>         keys = is.keySet();
+            Map<Object, Object> map  = Maps.newHashMapWithExpectedSize(keys.size());
             for (Object i : keys) {
                 Object key = this.parseResult(i);
                 Object vv  = is.get(i);
@@ -375,7 +376,7 @@ public class SimpleArgsParser implements ArgsParser {
                 list.add(object);
             }
             return list;
-        } else if (result.getClass().isArray()) {//数组
+        } else if (result.getClass().isArray()) {
             Class<? extends Object> class1        = result.getClass();
             Class<?>                componentType = class1.getComponentType();
             if (componentType == int.class) {

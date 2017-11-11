@@ -43,7 +43,9 @@ public class AbstractRpcAioConnector extends AbstractRpcConnector {
 
     private Logger logger = Logger.getLogger(AbstractRpcAioConnector.class);
 
-    //默认channel group threads 为 5
+    /**
+     * 默认channel group threads 为 5
+     */
     private int channelGroupThreads = 5;
 
     public AbstractRpcAioConnector(RpcAioWriter writer, AsynchronousSocketChannel channel) {

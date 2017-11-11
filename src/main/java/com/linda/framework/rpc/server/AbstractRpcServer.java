@@ -45,9 +45,10 @@ public abstract class AbstractRpcServer extends AbstractRpcNetworkBase {
     private RpcStatFilter statFilter = new RpcStatFilter();
 
     /**
-     * 执行线程数量
+     * 执行线程数量 默认20
      */
-    private int executorThreadCount = 20;//默认20
+
+    private int executorThreadCount = 20;
 
     public void setAcceptor(AbstractRpcAcceptor acceptor) {
         this.acceptor = acceptor;

@@ -7,14 +7,18 @@ import com.linda.framework.rpc.utils.RpcUtils;
 
 public abstract class AbstractRpcClient extends AbstractRpcNetworkBase {
 
-    //序列化可设置
+    /**
+     * 序列化可设置
+     */
     private RpcSerializer serializer;
 
     private SimpleClientRemoteProxy proxy = new SimpleClientRemoteProxy();
 
     protected Class<? extends AbstractRpcConnector> connectorClass;
-
-    private int executorThreadCount = 2;//默认2
+    /**
+     * 默认2
+     */
+    private int executorThreadCount = 2;
 
     public abstract AbstractClientRemoteExecutor getRemoteExecutor();
 

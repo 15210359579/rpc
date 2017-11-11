@@ -1,5 +1,6 @@
 package com.linda.framework.rpc.cluster;
 
+import com.google.common.collect.Maps;
 import com.linda.framework.rpc.RemoteCall;
 import com.linda.framework.rpc.RpcService;
 import com.linda.framework.rpc.client.AbstractClientRemoteExecutor;
@@ -257,7 +258,7 @@ public abstract class AbstractRpcClusterClientExecutor extends AbstractClientRem
     }
 
     private void setWeight(List<HostWeight> weights, List<RpcHostAndPort> hosts) {
-        Map<String, HostWeight> weightMap = new HashMap<>();
+        Map<String, HostWeight> weightMap = Maps.newHashMapWithExpectedSize(weights.size());
         for (HostWeight ww : weights) {
             weightMap.put(ww.getKey(), ww);
         }
