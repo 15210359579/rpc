@@ -10,7 +10,7 @@ import com.linda.framework.rpc.RemoteExecutor;
  * 泛化调用，方式是consumer用java的map替换对象，同时把类型传过来，provider做类型转换，
  * 然后调用相关服务，同时把返回值封装为java自带类型（对象封装为map）
  */
-public class SimpleGenericService implements GenericService {
+public class SimpleGenericServiceImpl implements GenericService {
 
     /**
      * 上层服务执行器
@@ -22,7 +22,7 @@ public class SimpleGenericService implements GenericService {
      */
     private ArgsParser argsParser;
 
-    public SimpleGenericService(RemoteExecutor executor) {
+    public SimpleGenericServiceImpl(RemoteExecutor executor) {
         this.executor = executor;
         this.argsParser = new SimpleArgsParser();
     }

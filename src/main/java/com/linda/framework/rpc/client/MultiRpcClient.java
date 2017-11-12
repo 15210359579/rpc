@@ -1,12 +1,12 @@
 package com.linda.framework.rpc.client;
 
-import com.linda.framework.rpc.net.AbstractRpcMultiConnector;
+import com.linda.framework.rpc.net.AbstractRpcMultiConnectorImpl;
 import com.linda.framework.rpc.nio.AbstractRpcNioConnector;
 
 public class MultiRpcClient extends AbstractRpcClient {
 
-    private MultiClientRemoteExecutor executor;
-    private AbstractRpcMultiConnector connector;
+    private MultiClientRemoteExecutorImpl executor;
+    private AbstractRpcMultiConnectorImpl connector;
     private int connections = 2;
 
     @Override
@@ -29,12 +29,12 @@ public class MultiRpcClient extends AbstractRpcClient {
         connector.setPort(this.getPort());
         connector.setConnectionCount(connections);
         connector.setExecutorThreadCount(threadCount);
-        executor = new MultiClientRemoteExecutor(connector);
+        executor = new MultiClientRemoteExecutorImpl(connector);
     }
 
     private void checkConnector() {
         if (connector == null) {
-            connector = new AbstractRpcMultiConnector();
+            connector = new AbstractRpcMultiConnectorImpl();
             if (connectorClass == null) {
                 connectorClass = AbstractRpcNioConnector.class;
             }

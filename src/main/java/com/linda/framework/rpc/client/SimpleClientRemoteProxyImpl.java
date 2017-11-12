@@ -13,7 +13,7 @@ import java.lang.reflect.Proxy;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class SimpleClientRemoteProxy implements InvocationHandler, Service {
+public class SimpleClientRemoteProxyImpl implements InvocationHandler, Service {
 
     private RemoteExecutor remoteExecutor;
 

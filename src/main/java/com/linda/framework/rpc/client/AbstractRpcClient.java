@@ -12,7 +12,7 @@ public abstract class AbstractRpcClient extends AbstractRpcNetworkBase {
      */
     private RpcSerializer serializer;
 
-    private SimpleClientRemoteProxy proxy = new SimpleClientRemoteProxy();
+    private SimpleClientRemoteProxyImpl proxy = new SimpleClientRemoteProxyImpl();
 
     protected Class<? extends AbstractRpcConnector> connectorClass;
     /**

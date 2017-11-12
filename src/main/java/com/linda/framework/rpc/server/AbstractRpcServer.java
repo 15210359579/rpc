@@ -1,9 +1,9 @@
 package com.linda.framework.rpc.server;
 
 import com.linda.framework.rpc.filter.RpcFilter;
-import com.linda.framework.rpc.filter.RpcStatFilter;
+import com.linda.framework.rpc.filter.RpcStatFilterImpl;
 import com.linda.framework.rpc.generic.GenericService;
-import com.linda.framework.rpc.generic.SimpleGenericService;
+import com.linda.framework.rpc.generic.SimpleGenericServiceImpl;
 import com.linda.framework.rpc.monitor.RpcMonitorService;
 import com.linda.framework.rpc.monitor.RpcMonitorServiceImpl;
 import com.linda.framework.rpc.monitor.StatMonitor;
@@ -12,6 +12,7 @@ import com.linda.framework.rpc.net.AbstractRpcNetworkBase;
 import com.linda.framework.rpc.nio.AbstractRpcNioAcceptor;
 import com.linda.framework.rpc.nio.AbstractRpcNioSelector;
 import com.linda.framework.rpc.serializer.RpcSerializer;
+import com.linda.framework.rpc.utils.Constants;
 import com.linda.framework.rpc.utils.RpcUtils;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public abstract class AbstractRpcServer extends AbstractRpcNetworkBase {
     /**
      * 服务端服务filter执行，提交给proxy
      */
-    private RpcServiceProvider provider = new RpcServiceProvider();
+    private RpcServiceProviderImpl provider = new RpcServiceProviderImpl();
 
     /**
      * 业务remote api注册与执行代理
@@ -42,7 +43,7 @@ public abstract class AbstractRpcServer extends AbstractRpcNetworkBase {
     /**
      * 服务端性能统计
      */
-    private RpcStatFilter statFilter = new RpcStatFilter();
+    private RpcStatFilterImpl statFilter = new RpcStatFilterImpl();
 
     /**
      * 执行线程数量 默认20
@@ -102,7 +103,7 @@ public abstract class AbstractRpcServer extends AbstractRpcNetworkBase {
     @Override
     public String getHost() {
         String host = super.getHost();
-        if (host == null || "0.0.0.0".equals(host)) {
+        if (host == null || Constants.DEFAULT_PORT.equals(host)) {
             List<String> iPs      = RpcUtils.getLocalV4IPs();
             String       chooseIP = RpcUtils.chooseIP(iPs);
             super.setHost(chooseIP);
@@ -189,7 +190,7 @@ public abstract class AbstractRpcServer extends AbstractRpcNetworkBase {
      * 添加泛型的支持
      */
     private void addGenericSupport() {
-        this.register(GenericService.class, new SimpleGenericService(proxy));
+        this.register(GenericService.class, new SimpleGenericServiceImpl(proxy));
     }
 
     public int getExecutorThreadCount() {

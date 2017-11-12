@@ -11,7 +11,7 @@ import java.nio.channels.CompletionHandler;
  * @author lindezhi
  * 2016年6月13日 下午3:00:39
  */
-public class RpcAcceptCompletionHandler implements CompletionHandler<AsynchronousSocketChannel, AbstractRpcAioAcceptor>, Service {
+public class RpcAcceptCompletionHandlerImpl implements CompletionHandler<AsynchronousSocketChannel, AbstractRpcAioAcceptor>, Service {
 
     /**
      * 公共的readerhandler

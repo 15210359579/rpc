@@ -2,6 +2,7 @@ package com.linda.framework.rpc.generic;
 
 import com.google.common.collect.Maps;
 import com.linda.framework.rpc.exception.RpcException;
+import com.linda.framework.rpc.utils.Constants;
 import com.linda.framework.rpc.utils.RpcUtils;
 
 import java.lang.reflect.Array;
@@ -77,12 +78,13 @@ public class SimpleArgsParser implements ArgsParser {
         } else {
             throw new RpcException("the value of " + type + " must be a map");
         }
+
     }
 
     private Object parseJdkObject(String type, Object obj) {
-        if (type.startsWith("java.lang.String")) {
+        if (type.startsWith(Constants.STRING_TYPE)) {
             return (String) obj;
-        } else if (type.startsWith("java.lang.Integer")) {
+        } else if (type.startsWith(Constants.INTEGER_TYPE)) {
             return (Integer) obj;
         } else if (type.startsWith("java.lang.Long")) {
             return (Long) obj;
@@ -100,7 +102,7 @@ public class SimpleArgsParser implements ArgsParser {
             return (Character) obj;
         } else if ("int".equals(type)) {
             return (int) (Integer) obj;
-        } else if (type.equals("long")) {
+        } else if ("long".equals(type)) {
             return (long) (Long) obj;
         } else if ("short".equals(type)) {
             return (short) (Short) obj;

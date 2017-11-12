@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AbstractRpcMultiConnector extends AbstractRpcNet implements Service {
+public class AbstractRpcMultiConnectorImpl extends AbstractRpcNet implements Service {
 
     private static final int                                        DEFAULT_CONNECTION_COUNT = 5;
     private              int                                        connectionCount          = DEFAULT_CONNECTION_COUNT;

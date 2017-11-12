@@ -25,6 +25,6 @@ public class SimpleRpcClient extends AbstractRpcClient {
         connector.setHost(this.getHost());
         connector.setPort(this.getPort());
         connector.setExecutorThreadCount(threadCount);
-        executor = new SimpleClientRemoteExecutor(connector);
+        executor = new SimpleClientRemoteExecutorImpl(connector);
     }
 }

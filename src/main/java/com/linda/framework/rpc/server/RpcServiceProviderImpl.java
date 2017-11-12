@@ -20,9 +20,9 @@ import org.apache.log4j.Logger;
  * @author lindezhi
  * 2015年6月14日 上午9:41:45
  */
-public class RpcServiceProvider implements RpcCallListener, RpcFilter, Service {
+public class RpcServiceProviderImpl implements RpcCallListener, RpcFilter, Service {
 
-    private Logger logger = Logger.getLogger(RpcServiceProvider.class);
+    private Logger logger = Logger.getLogger(RpcServiceProviderImpl.class);
 
     /**
      * 提交给上层的执行器
@@ -40,7 +40,7 @@ public class RpcServiceProvider implements RpcCallListener, RpcFilter, Service {
 
     private RpcFilterChain filterChain;
 
-    public RpcServiceProvider() {
+    public RpcServiceProviderImpl() {
         serializer = new JdkSerializer();
         exceptionHandler = new SimpleRpcExceptionHandler();
         filterChain = new SimpleRpcFilterChain();

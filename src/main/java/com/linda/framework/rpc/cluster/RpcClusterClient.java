@@ -3,7 +3,7 @@ package com.linda.framework.rpc.cluster;
 import com.linda.framework.rpc.RpcService;
 import com.linda.framework.rpc.client.AbstractClientRemoteExecutor;
 import com.linda.framework.rpc.client.AbstractRpcClient;
-import com.linda.framework.rpc.client.SimpleClientRemoteProxy;
+import com.linda.framework.rpc.client.SimpleClientRemoteProxyImpl;
 import com.linda.framework.rpc.net.AbstractRpcConnector;
 import com.linda.framework.rpc.utils.RpcUtils;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class RpcClusterClient extends AbstractRpcClient {
 
-    private SimpleClientRemoteProxy proxy;
+    private SimpleClientRemoteProxyImpl proxy;
 
     private AbstractRpcClusterClientExecutor executor;
 
@@ -84,7 +84,7 @@ public class RpcClusterClient extends AbstractRpcClient {
 
     private void checkProxy() {
         if (proxy == null) {
-            proxy = new SimpleClientRemoteProxy();
+            proxy = new SimpleClientRemoteProxyImpl();
         }
     }
 

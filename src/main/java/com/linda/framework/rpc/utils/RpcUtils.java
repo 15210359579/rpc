@@ -414,13 +414,18 @@ public class RpcUtils {
     }
 
     public static long getNowMinute() {
-        return getMinute(new Date());
+        return getMinute();
     }
 
     @SuppressWarnings("deprecation")
-    public static long getMinute(Date date) {
-        GregorianCalendar calendar = new GregorianCalendar(1900 + date.getYear(), date.getMonth(), date.getDay(),
-                                                           date.getHours(), date.getMinutes());
+    public static long getMinute() {
+        Calendar ca = Calendar.getInstance();
+        int year =ca.get(Calendar.YEAR);
+        int month=ca.get(Calendar.MONTH) + 1;
+        int day=ca.get(Calendar.DATE);
+        int minute=ca.get(Calendar.MINUTE);
+        int hour=ca.get(Calendar.HOUR);
+        GregorianCalendar calendar = new GregorianCalendar(year, month, day, hour, minute);
         return calendar.getTimeInMillis();
     }
 

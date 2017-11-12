@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author linda
  * 使用一个异步线程的方式
  */
-public class RpcStatFilter implements RpcFilter, Service, StatMonitor {
+public class RpcStatFilterImpl implements RpcFilter, Service, StatMonitor {
 
     private ConcurrentHashMap<Long, AtomicLong> staCache = new ConcurrentHashMap<Long, AtomicLong>();
 

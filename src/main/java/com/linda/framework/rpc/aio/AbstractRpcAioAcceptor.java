@@ -17,7 +17,7 @@ public class AbstractRpcAioAcceptor extends AbstractRpcAcceptor {
 
     private AsynchronousServerSocketChannel serverChannel;
 
-    private RpcAcceptCompletionHandler acceptHandler;
+    private RpcAcceptCompletionHandlerImpl acceptHandler;
 
     private AsynchronousChannelGroup channelGroup;
 
@@ -38,7 +38,7 @@ public class AbstractRpcAioAcceptor extends AbstractRpcAcceptor {
         super.startService();
         try {
             //启动acceptor，开始接受连接
-            acceptHandler = new RpcAcceptCompletionHandler();
+            acceptHandler = new RpcAcceptCompletionHandlerImpl();
             acceptHandler.startService();
             channelGroup = AsynchronousChannelGroup.withThreadPool(Executors.newFixedThreadPool(channelGroupThreads));
             serverChannel = AsynchronousServerSocketChannel.open(channelGroup).bind(
